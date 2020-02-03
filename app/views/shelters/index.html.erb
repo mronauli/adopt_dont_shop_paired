@@ -1,0 +1,9 @@
+<br><br><h1>All Shelters<h1>
+<% @shelters.each do |shelter|  %>
+   <section class="grid-container" id= 'shelter-<%=shelter.id%>'>
+      <p><%= link_to shelter.name, "/shelters/#{shelter.id}" %><p> 
+      <h6><%= link_to  "Update Shelter", "/shelters/#{shelter.id}/edit" %><h6>
+      <h6><%= link_to  "Delete Shelter", "/shelters/#{shelter.id}", method: :delete %> <h6>
+   </section>
+<% end %>
+ <%= link_to  "Create New Shelter", new_shelter_path %>
