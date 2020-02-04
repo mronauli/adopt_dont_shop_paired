@@ -25,8 +25,6 @@ RSpec.describe 'As a visitor' do
             fill_in 'pet[description]',	with: description
 
             click_on "Create Pet"
-
-            pet = Pet.last
             
             expect(current_path).to eq(shelter_pets_path(shelter_1))
             

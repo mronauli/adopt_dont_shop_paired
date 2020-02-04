@@ -12,5 +12,6 @@ Zip Code:<%= @shelter.zip %></br>
   </div>
 <% end %>
 <%= link_to  "All Pets", "/shelters/#{@shelter.id}/pets" %><br>
+<%= link_to  "Add Review", "/shelters/#{@shelter.id}/reviews/new" %><br>
 <%= link_to  "Update Shelter", edit_shelter_path %>
 <%= link_to  "Delete Shelter", shelter_path, method: :delete %>

@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   resources :pets, except: [:new, :create]
 
+  get '/shelters/:id/reviews/new', to: 'reviews#new'
+  post '/shelters/:id/reviews/new', to: 'reviews#create'
 end
