@@ -8,9 +8,12 @@ Zip Code:<%= @shelter.zip %></br>
     Review: <%= review.title %><br>
     Rating: <%= review.rating %><br>
     Description: <%= review.content %><br>
-    <%= review.picture %><br>
+    <% if review.picture %>
+      <%= image_tag(review.picture) %><br>
+    <% end %>
   </div>
 <% end %>
+
 <%= link_to  "All Pets", "/shelters/#{@shelter.id}/pets" %><br>
 <%= link_to  "Add Review", "/shelters/#{@shelter.id}/reviews/new" %><br>
 <%= link_to  "Update Shelter", edit_shelter_path %>
