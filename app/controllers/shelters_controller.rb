@@ -24,6 +24,7 @@ class SheltersController < ApplicationController
 
   def update
     @shelter = Shelter.find(params[:id])
+
     @shelter.update_attributes(shelter_params)
 
     redirect_to shelter_path
@@ -31,7 +32,6 @@ class SheltersController < ApplicationController
 
   def destroy
     @shelter = Shelter.destroy(params[:id])
-
     redirect_to shelters_path
   end
 
