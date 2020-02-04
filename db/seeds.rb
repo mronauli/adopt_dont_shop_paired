@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#shelters 
+#shelters
 shelter_1 = Shelter.create!(name: "Mike's Shelter", address: "1331 17th Street", city: "Denver", state: "CO", zip: 80202)
 shelter_2 = Shelter.create!(name: "Meg's Shelter", address: "50 Main Street", city: "Hershey", state: "PA", zip: 17033)
 shelter_3 = Shelter.create!(name: "Dumb Friends League", address: "123 Sample St", city: "Denver", state: "CO", zip: 80220)
@@ -33,12 +33,16 @@ shelter_4 = Shelter.create!(name: "Smart Friends League", address: "456 Sample S
 # Shelter.create(name: 'Cobre Dog Haven', address: '20 Burton Avenue', city: 'Worcester', state: 'Massachusetts', zip: 41610)
 # Shelter.create(name: 'Conchas Dam Dog Shelter', address: '81 East Amana Lane', city: 'Mission Viejo', state: 'California', zip: 92692)
 
-#shelter_1 pets 
+#shelter_1 pets
 sparky = shelter_1.pets.create!(name: 'Sparky', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/west_highland_white_terrier_24.jpg', approximate_age: 5, sex: 'Male', description: "Fun but no so nice",  adoptable: true)
 peppo  = shelter_1.pets.create!(name: 'Peppo', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/mexican_hairless_105.jpg', approximate_age: 13, sex: 'Female', description: "Basically a naked molerat",  adoptable: true)
 
-# #shelter_2 pets 
+# #shelter_2 pets
 peter = shelter_2.pets.create!(name: "Peter", image: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/13002248/GettyImages-187066830.jpg", approximate_age: 3, sex: "Male", description: "Sooooo cute!", adoptable: true)
+
+review_1 = shelter_2.reviews.create!(title: "Very bad!",
+                          rating: 1.5,
+                          content: "Molly came back skinny")
 
 
 # Pet.create(name: 'Sparky', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/west_highland_white_terrier_24.jpg', age_approx: 5, sex: 'male', breed: 'West Highland White Terrier', adoptable: true, shelter_id: 67)

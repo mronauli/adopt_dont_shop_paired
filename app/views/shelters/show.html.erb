@@ -3,6 +3,14 @@ Address:<%= @shelter.address %></br>
 City:<%= @shelter.city %></br>
 State:<%= @shelter.state %></br>
 Zip Code:<%= @shelter.zip %></br>
+<% @shelter.reviews.each do |review| %>
+  <div class="grid-container" id= 'review-<%=review.id%>'>
+    Review: <%= review.title %><br>
+    Rating: <%= review.rating %><br>
+    Description: <%= review.content %><br>
+    <%= review.picture %><br>
+  </div>
+<% end %>
 <%= link_to  "All Pets", "/shelters/#{@shelter.id}/pets" %><br>
 <%= link_to  "Update Shelter", edit_shelter_path %>
 <%= link_to  "Delete Shelter", shelter_path, method: :delete %>
