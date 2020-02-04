@@ -15,13 +15,18 @@ RSpec.describe 'As a visitor' do
             name  = 'Tank'
             approximate_age = 5
             sex = 'Male'
+            description = 'Fun but no so nice'
+            # adoptable = true
 
             fill_in 'pet[image]', with: image 
             fill_in 'pet[name]', with: name 
             fill_in 'pet[approximate_age]',	with: approximate_age
             fill_in 'pet[sex]',	with: sex
+            fill_in 'pet[description]',	with: description
 
             click_on "Create Pet"
+
+            pet = Pet.last
             
             expect(current_path).to eq(shelter_pets_path(shelter_1))
             
