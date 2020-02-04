@@ -19,6 +19,7 @@ class PetsController < ApplicationController
     end
 
     def create
+        
         @shelter = Shelter.find(params[:shelter_id])
         @pet = @shelter.pets.create(pet_params)
 
@@ -44,6 +45,6 @@ class PetsController < ApplicationController
 
     private
         def pet_params
-            params.require(:pet).permit(:image, :name, :approximate_age, :sex)
+            params.require(:pet).permit(:image, :name, :approximate_age, :sex, :description)
         end 
 end 
