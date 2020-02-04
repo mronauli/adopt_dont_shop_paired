@@ -28,9 +28,10 @@ RSpec.describe 'As a visitor' do
         it "I see the adoption status" do
             visit pet_path(@sparky)
 
-            expect(page).to have_content(@sparky.adoptable)
-
-            expect(@sparky.adoptable).to eq(true)  
+            expect(page).to have_content("Adoptable")
+            expect(@sparky.adoptable).to eq(true) 
+            
+            
             expect(@peppo.adoptable).to eq(false)  
         end 
 
