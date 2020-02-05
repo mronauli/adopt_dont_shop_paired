@@ -9,8 +9,9 @@ Zip Code:<%= @shelter.zip %></br>
     Rating: <%= review.rating %><br>
     Description: <%= review.content %><br>
      <% if review.picture %>
-    <%= image_tag(review.picture) %><br>
+      <%= image_tag(review.picture) %><br>
      <% end %>
+     <%= link_to "Edit Review", "/shelters/#{@shelter.id}/reviews/#{review.id}/edit" %><br>
   </div>
 <% end %>
 
