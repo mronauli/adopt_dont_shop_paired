@@ -36,11 +36,11 @@ RSpec.describe 'As a visitor' do
             expect(page).to have_content(@shelter_1.zip)
         end
         it "can see a list of reviews for that shelter; each review has title, rating, content and optional picture" do
-          visit shelter_path (@shelter_1)
+            visit shelter_path (@shelter_1)
 
-          expect(page).to have_content(@shelter_1.name)
+            expect(page).to have_content(@shelter_1.name)
 
-          within("#review-#{@review_1.id}") do
+            within("#review-#{@review_1.id}") do
 
             expect(page).to have_content(@review_1.title)
             expect(page).to have_content(@review_1.rating)
@@ -48,11 +48,11 @@ RSpec.describe 'As a visitor' do
             expect(page).to_not have_css("img[src *= '#{@review_1.picture}']")
           end
 
-          expect(page).to_not have_content(@shelter_2.name)
-          expect(page).to_not have_content(@review_2.title)
-          expect(page).to_not have_content(@review_2.rating)
-          expect(page).to_not have_content(@review_2.content)
-          expect(page).to_not have_css("img[src *= '#{@review_2.picture}']")
+            expect(page).to_not have_content(@shelter_2.name)
+            expect(page).to_not have_content(@review_2.title)
+            expect(page).to_not have_content(@review_2.rating)
+            expect(page).to_not have_content(@review_2.content)
+            expect(page).to_not have_css("img[src *= '#{@review_2.picture}']")
         end
     end
 end
