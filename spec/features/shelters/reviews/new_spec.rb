@@ -30,5 +30,6 @@ RSpec.describe 'As a visitor' do
                 expect(page).to have_content(review_1.content)
             end
         end
+
     end
 end
