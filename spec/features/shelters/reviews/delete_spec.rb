@@ -14,7 +14,7 @@ RSpec.describe "on a shelter's show page", type: :feature do
                                     state: "PA",
                                     zip: 17033)
         @review_1 = Review.create(title: "Less than okay...",
-                                    rating: 2,
+                                    rating: 9,
                                     content: "Daily naps",
                                     picture: "https://external-preview.redd.it/GjG4tB1Z_A-rdKs5wxx7qR873hJRFl8gTzs7S3d6DJ0.jpg?auto=webp&s=fc48628c7c82e8b87b541ad396a66e7253aa86b9",
                                     shelter: @shelter_1)
@@ -29,46 +29,19 @@ RSpec.describe "on a shelter's show page", type: :feature do
                                     picture: "https://www.gwinnettcounty.com/static/departments/communityservices/images/shelter.jpg",
                                     shelter: @shelter_2)
     end
-    it "can see a link to edit a review next to each review" do
+    it "can see a link to delete a review next to each review" do
       visit "/shelters/#{@shelter_1.id}"
       expect(page).to have_content(@review_1.title)
       expect(page).to have_content(@review_1.rating)
       expect(page).to have_content(@review_1.content)
       expect(page).to have_css("img[src *= '#{@review_1.picture}']")
+      click_link "Delete Review"
 
-      click_link "Edit Review"
-      expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}/edit")
-    end
-    it "can fill out a form and update a particular review" do
-
-      visit "/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}/edit"
-
-      title = "Okay..."
-      rating = 3
-
-      fill_in :title, with: title
-      fill_in :rating, with: rating
-      click_button "Submit Changes"
       expect(current_path).to eq("/shelters/#{@shelter_1.id}")
-      expect(page).to have_content(title)
-      expect(page).to have_content(rating)
-    end
-    it "can see a flash message if required fields are not filled out" do
-
-      visit "/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}/edit"
-
-      title = "Very bad!"
-      content = "Molly came back skinny"
-      rating = ""
-
-      fill_in 'title', with: title
-      fill_in 'content', with: content
-      fill_in 'rating', with: rating
-
-      click_on "Submit Changes"
-
-      expect(page).to have_content "Please enter information for title, rating and content."
-      expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}")
+      expect(page).to_not have_content(@review_1.title)
+      expect(page).to_not have_content(@review_1.rating)
+      expect(page).to_not have_content(@review_1.content)
+      expect(page).to_not have_css("img[src *= '#{@review_1.picture}']")
     end
   end
 end

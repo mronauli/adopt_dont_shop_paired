@@ -49,7 +49,8 @@ RSpec.describe 'As a visitor' do
 
         click_on "Submit Review"
 
-        expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/new")
+        expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews")
+        expect(page).to have_button("Submit Review")
         expect(page).to have_content "Please enter information for title, rating and content."
       end
     end

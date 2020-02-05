@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
       redirect_to "/shelters/#{@shelter.id}"
     else
       flash[:alert] = 'Please enter information for title, rating and content.'
-      redirect_to "/shelters/#{@shelter.id}/reviews/new"
+      render :new
     end
   end
 
@@ -27,8 +27,15 @@ class ReviewsController < ApplicationController
       redirect_to "/shelters/#{shelter_id}"
     else
       flash[:alert] = 'Please enter information for title, rating and content.'
-      redirect_to "/shelters/#{@review.shelter_id}/reviews/#{@review.id}/edit"
+      render :edit
     end
+  end
+
+  def destroy
+    shelter_id = Review.find(params[:id]).shelter_id
+    @review = Review.find(params[:id])
+    review = Review.destroy(params[:id])
+    redirect_to "/shelters/#{shelter_id}"
   end
 
   private
