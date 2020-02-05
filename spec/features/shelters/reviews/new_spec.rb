@@ -41,13 +41,16 @@ RSpec.describe 'As a visitor' do
 
         title = "Very bad!"
         content = "Molly came back skinny"
+        rating = ""
 
         fill_in 'title', with: title
+        fill_in 'content', with: content
         fill_in 'rating', with: rating
 
         click_on "Submit Review"
-        expect(page).to have_content "Please enter information for title, rating and content."
+
         expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/new")
+        expect(page).to have_content "Please enter information for title, rating and content."
       end
     end
   end
