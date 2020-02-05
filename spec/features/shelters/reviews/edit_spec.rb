@@ -48,10 +48,27 @@ RSpec.describe "on a shelter's show page", type: :feature do
 
       fill_in :title, with: title
       fill_in :rating, with: rating
-      click_button "Submit"
+      click_button "Submit Changes"
       expect(current_path).to eq("/shelters/#{@shelter_1.id}")
       expect(page).to have_content("Okay...")
       expect(page).to have_content("3")
+    end
+    it "can see a flash message if required fields are not filled out" do
+
+      visit "/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}/edit"
+
+      title = "Very bad!"
+      content = "Molly came back skinny"
+      rating = ""
+
+      fill_in 'title', with: title
+      fill_in 'content', with: content
+      fill_in 'rating', with: rating
+
+      click_on "Submit Changes"
+
+      expect(page).to have_content "Please enter information for title, rating and content."
+      expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}/edit")
     end
   end
 end
