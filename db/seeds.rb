@@ -41,7 +41,7 @@ peppo  = shelter_1.pets.create!(name: 'Peppo', image: 'https://adopt-dont-shop.s
 peter = shelter_2.pets.create!(name: "Peter", image: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/13002248/GettyImages-187066830.jpg", approximate_age: 3, sex: "Male", description: "Sooooo cute!", adoptable: true)
 
 review_1 = shelter_2.reviews.create!(title: "Very bad!",
-                          rating: 1.5,
+                          rating: 1,
                           content: "Molly came back skinny")
 
 

@@ -16,7 +16,7 @@ RSpec.describe 'As a visitor' do
                                     zip: 17033)
 
         @review_1 = @shelter_1.reviews.create!(title: "Very bad!",
-                                  rating: 1.5,
+                                  rating: 1,
                                   content: "Molly came back skinny")
 
         @review_2 = @shelter_2.reviews.create!(title: "Splendid!",
@@ -41,7 +41,7 @@ RSpec.describe 'As a visitor' do
           expect(page).to have_content(@shelter_1.name)
 
           within("#review-#{@review_1.id}") do
-            save_and_open_page
+
             expect(page).to have_content(@review_1.title)
             expect(page).to have_content(@review_1.rating)
             expect(page).to have_content(@review_1.content)
