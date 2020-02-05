@@ -68,7 +68,7 @@ RSpec.describe "on a shelter's show page", type: :feature do
       click_on "Submit Changes"
 
       expect(page).to have_content "Please enter information for title, rating and content."
-      expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}/edit")
+      expect(current_path).to eq("/shelters/#{@shelter_1.id}/reviews/#{@review_1.id}")
     end
   end
 end
