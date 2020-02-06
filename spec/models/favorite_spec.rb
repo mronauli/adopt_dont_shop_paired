@@ -30,4 +30,10 @@ RSpec.describe Favorite do
           expect(favorite.count_of(2)).to eq(0)
         end
       end
+    describe "#keys" do
+        subject { Favorite.new({'123' => 1, '321' => 1}) }
+        it "returns the keys of all pets in the favorite" do
+           expect(subject.contents.keys).to eq(['123', '321'])
+        end
+    end
 end
