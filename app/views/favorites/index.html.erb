@@ -1,0 +1,15 @@
+
+<% if favorite.contents.empty? == true %>
+    <h1>No pets have been favorited yet.<h1>
+<%else%>
+    <h1>All Favorited Pets<h1>
+    <% @pets.each do |pet|  %>
+        <div class="grid-container" id= 'pet-<%=pet.id%>'>
+            <% if favorite.has_pet?(pet.id) %>
+                <%= image_tag(pet.image) %>
+                <h4>Name: <%= link_to  pet.name, "/pets/#{pet.id}" %><h4> 
+            <% end %>
+        </div>
+    <% end %>
+    <%= link_to  "Adopt Favorited Pets", "/applicatons/new" %>
+ <% end %>
