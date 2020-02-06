@@ -9,5 +9,6 @@
     <% else%>
         <p>Status: Not Adoptable<p>
     <% end %>
+<%= button_to  "Favorite This Pet", "/favorites/#{@pet.id}", method: :patch %>
 <%= link_to  "Update Pet", edit_pet_path %>
 <%= link_to  "Delete Pet", pet_path, method: :delete %>
