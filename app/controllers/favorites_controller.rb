@@ -1,5 +1,9 @@
 class FavoritesController < ApplicationController
 
+    def index 
+        @pets = Pet.all 
+    end 
+
     def update
         pet = Pet.find(params[:id])
         favorite.add_pet(pet.id)
