@@ -1,24 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe Favorite do
-  favorite = { Favorite.new({'123' => 1, '321' => 1}) }
-
-  describe "#total_count" do
-    it "calculates the total number of songs it holds" do
-      expect(subject.total_count).to eq(5)
+    
+    describe "#total_count" do
+        subject { Favorite.new({'123' => 1, '321' => 1}) }
+        it "calculates the total number of pets it holds" do
+            expect(subject.total_count).to eq(2)
+        end
     end
-  end
 
-  describe "#add_song" do
-    it "adds a song to its contents" do
-      cart = Favorite.new({
-        '1' => 2,  # two copies of song 1
-        '2' => 3   # three copies of song 2
-      })
-      subject.add_song(1)
-      subject.add_song(2)
+    describe "#add_pet" do
+        subject { Favorite.new({}) }
+        it "adds a pet to its contents" do
+            favorite = Favorite.new({
+            '123' => 1,  # 1 copies of pet 1
+            '321' => 1   # 1 copies of pet 2
+            })
+            subject.add_pet(123)
+            subject.add_pet(321)
 
-      expect(subject.contents).to eq({'1' => 3, '2' => 4})
+            expect(subject.contents).to eq({'123' => 1, '321' => 1 })
+        end
     end
-  end
+
+    describe "#count_of" do
+        it "returns the count of all pets in the favorite" do
+          favorite = Favorite.new({})
+      
+          expect(favorite.count_of(2)).to eq(0)
+        end
+      end
 end
