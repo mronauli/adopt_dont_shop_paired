@@ -35,13 +35,13 @@ describe "As a visitor" do
             within ("#pet-#{@peppo.id}") do 
                 expect(page).to have_css("img[src *= 'mexican_hairless_105.jp']")
                 expect(page).to have_link(@peppo.name)
-                expect(page).to have_button("Favorite This Pet")
+                expect(page).to have_button("Unfavorite This Pet")
             end 
 
             within ("#pet-#{@sparky.id}") do 
                 expect(page).to have_css("img[src *= 'west_highland_white_terrier_24.jpg']")
                 expect(page).to have_link(@sparky.name)
-                expect(page).to have_button("Favorite This Pet")
+                expect(page).to have_button("Unfavorite This Pet")
             end 
         end
      end

@@ -8,7 +8,7 @@
             <% if favorite.has_pet?(pet.id) %>
                 <%= image_tag(pet.image) %>
                 <h4>Name: <%= link_to  pet.name, "/pets/#{pet.id}" %><h4> 
-                <%= button_to  "Favorite This Pet", "/favorites/#{pet.id}", method: :patch %>     
+                 <%= button_to "Unfavorite This Pet" , "/favorites/#{pet.id}", method: :delete %>
             <% end %>
         </div>
     <% end %>
