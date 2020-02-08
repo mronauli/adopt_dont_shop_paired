@@ -28,4 +28,8 @@ class Favorite
   def has_pet?(id)
     @contents.keys.include?(id.to_s) 
   end
+
+  def destroy_all
+    @contents.clear
+  end
 end

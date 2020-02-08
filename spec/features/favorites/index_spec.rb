@@ -52,5 +52,27 @@ describe "As a visitor" do
             expect(page).to_not have_content(@peppo.name)  
             expect(page).to have_content(@sparky.name)  
         end
+        
+        describe "When visit favorites index" do
+            it "I can remove all pet's from favorites and the are no longer visible within index" do
+                visit "/pets/#{@sparky.id}"
+                click_button "Favorite This Pet"
+                
+                visit "/pets/#{@peppo.id}"
+                click_button "Favorite This Pet"
+    
+                visit "/favorites"
+
+                expect(page).to have_content(@sparky.name)
+                expect(page).to have_content(@peppo.name)
+
+                click_button "Unfavorite All Pets"
+
+                expect(page).to_not have_content(@sparky.name)
+                expect(page).to_not have_content(@peppo.name)
+
+                expect(page).to have_content("No pets have been favorited yet")
+            end 
+        end
      end
 end
