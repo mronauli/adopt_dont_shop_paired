@@ -22,6 +22,7 @@ describe "As a visitor" do
             expect(page).to have_css("img[src *= 'mexican_hairless_105.jp']")
         end
      end
+
     describe "When visit favorites index" do
         it "I can remove pet's from favorites and the are no longer visible within index" do
             visit "/pets/#{@sparky.id}"
@@ -36,6 +37,7 @@ describe "As a visitor" do
                 expect(page).to have_css("img[src *= 'mexican_hairless_105.jp']")
                 expect(page).to have_link(@peppo.name)
                 expect(page).to have_button("Unfavorite This Pet")
+                click_button "Unfavorite This Pet"
             end 
 
             within ("#pet-#{@sparky.id}") do 
@@ -43,6 +45,12 @@ describe "As a visitor" do
                 expect(page).to have_link(@sparky.name)
                 expect(page).to have_button("Unfavorite This Pet")
             end 
+
+            visit "/favorites"
+            #discover better way to test refresh page. method does it but cant test it. 
+
+            expect(page).to_not have_content(@peppo.name)  
+            expect(page).to have_content(@sparky.name)  
         end
      end
 end
