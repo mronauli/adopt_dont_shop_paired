@@ -1,4 +1,7 @@
-<%= form_tag("/applications/new", method: :post) do %>
+<%= form_tag("/applications", method: :post) do %>
+
+  <%= label_tag "pets" %>
+  <%= select_tag :pets, options_from_collection_for_select(@pets, :id, :name), multiple: true %>
 
   <%= label_tag "name" %>
   <%= text_field_tag :name %>
@@ -14,7 +17,7 @@
 
   <%= label_tag "zip" %>
   <%= text_field_tag :zip %>
-  
+
   <%= label_tag "phone_number" %>
   <%= text_field_tag :phone_number %>
 
