@@ -7,9 +7,9 @@
         <div class="grid-container" id= 'pet-<%=pet.id%>'>
             <% if favorite.has_pet?(pet.id) %>
                 <%= image_tag(pet.image) %>
-                <h4>Name: <%= link_to  pet.name, "/pets/#{pet.id}" %><h4> 
+                <h4>Name: <%= link_to  pet.name, "/pets/#{pet.id}" %><h4>
             <% end %>
         </div>
     <% end %>
-    <%= link_to  "Adopt Favorited Pets", "/applicatons/new" %>
+    <%= link_to  "Adopt Favorited Pets", "/applications/new" %>
  <% end %>
