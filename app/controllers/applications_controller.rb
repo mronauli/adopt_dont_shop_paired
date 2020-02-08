@@ -9,8 +9,14 @@ class ApplicationsController < ApplicationController
     favorited_pets = favorite.contents.keys
     @pets = Pet.find(favorited_pets)
     @pets << application
-    flash[:success] = "Application for #{@pets.names} submitted successfully!"
-    redirect_to "/favorites"
+    if application.save
+      session[:favorite].clear
+      flash[:success] = "Your application for #{pet names } submitted successfully!"
+      redirect_to "/favorites"
+    else
+      flash[:alert] = "Please enter information for all fields."
+      redirect_to "/applications/new"
+    end
   end
 
   private
