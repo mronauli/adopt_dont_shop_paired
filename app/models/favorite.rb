@@ -26,6 +26,6 @@ class Favorite
   end
 
   def has_pet?(id)
-    @contents.keys.include?(id.to_s)
+    @contents.keys.include?(id.to_s) 
   end
 end
