@@ -6,7 +6,7 @@ describe "As a visitor" do
         @sparky = @shelter_1.pets.create!(name: 'Sparky', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/west_highland_white_terrier_24.jpg', approximate_age: 5, sex: 'male', description: "Fun but no so nice",  adoptable: true)
         @peppo  = @shelter_1.pets.create!(name: 'Peppo', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/mexican_hairless_105.jpg', approximate_age: 13, sex: 'female', description: "Basically a naked molerat",  adoptable: true)
         @sparko = @shelter_1.pets.create!(name: 'Sparko', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/west_highland_white_terrier_24.jpg', approximate_age: 5, sex: 'male', description: "Fun but no so nice",  adoptable: true)
-
+        @application_1 = @sparky.applications.create(name: "Betty", address: "1234 Crocker St", city: "Rialto", state: "CO", zip: 80432, phone_number: "404-231-9056", description: "Loves dogs")
     end
 
     describe "When I have added pets to my favorites list and visit favorites index" do
@@ -25,4 +25,51 @@ describe "As a visitor" do
             expect(page).to_not have_content(@sparko.name)
         end
      end
+     describe "after one or more applications have been create" do
+       it "sees a section that lists all the pets that have at least one application" do
+         visit "/pets/#{@sparky.id}"
+         click_button "Favorite This Pet"
+
+         visit "/pets/#{@peppo.id}"
+         click_button "Favorite This Pet"
+
+         visit "/favorites"
+         click_link "Adopt Favorited Pets"
+         expect(current_path).to eq("/applications/new")
+
+         name = ""
+         address = "5432 Point Ave"
+         city = "Denver"
+         state = "CO"
+         zip = "80231"
+         phone_number = "303-455-9786"
+         description = "I have a big backyard"
+
+         select @sparky.name, from: :pets
+         fill_in 'name', with: name
+         fill_in 'address', with: address
+         fill_in 'city', with: city
+         fill_in 'state', with: state
+         fill_in 'zip', with: zip
+         fill_in 'phone_number', with: phone_number
+         fill_in 'description', with: description
+
+         click_on "Submit Application"
+         visit "/favorites"
+         within("#pet_application-#{@application_1.id}") do
+           expect(page).to have_content(@sparky.name)
+           expect(page).to have_content(@peppo.name)
+         end
+       end
+     end
 end
+
+
+
+# User Story 18, List of Pets that have applications on them
+#
+# As a visitor
+# After one or more applications have been created
+# When I visit the favorites index page
+# I see a section on the page that has a list of all of the pets that have at least one application on them
+# Each pet's name is a link to their show page
