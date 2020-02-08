@@ -3,6 +3,7 @@
     <h1>No pets have been favorited yet.<h1>
 <%else%>
     <h1>All Favorited Pets<h1>
+    <h4><%= button_to "Unfavorite All Pets" , "/favorites", method: :delete %></h4><br>
     <% @pets.each do |pet|  %>
         <div class="grid-container" id= 'pet-<%=pet.id%>'>
             <% if favorite.has_pet?(pet.id) %>

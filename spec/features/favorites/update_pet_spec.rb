@@ -51,8 +51,8 @@ RSpec.describe " As a visitor" do
       expect(current_path).to eq("/pets/#{@sparky.id}")
       expect(page).to have_content("#{@sparky.name} has been removed from your favorites.")
 
-      # expect(page).to have_button("Favorite This Pet")
-      # expect(page).to_not have_button("Unfavorite This Pet")
+      expect(page).to have_button("Favorite This Pet")
+      expect(page).to_not have_button("Unfavorite This Pet")
 
       expect(page).to have_content("Favorites: 0")
 
