@@ -1,4 +1,4 @@
-class Favorite 
+class Favorite
   attr_reader :contents
 
   def initialize(initial_contents)
@@ -16,12 +16,16 @@ class Favorite
   def add_pet(id)
     @contents[id.to_s] = count_of(id) + 1
   end
-  
+
+  def delete_pet(id)
+    @contents[id.to_s] = count_of(id) - 1
+  end
+
   def keys
-    @contents.keys 
+    @contents.keys
   end
 
   def has_pet?(id)
-    @contents.keys.include?(id.to_s)
-  end 
+    @contents.keys.include?(id.to_s) 
+  end
 end
