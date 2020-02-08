@@ -17,7 +17,5 @@ class FavoritesController < ApplicationController
     favorite.delete_pet(pet.id)
     flash[:success] = "#{pet.name} has been removed from your favorites."
     redirect_back(fallback_location: "/pets/#{pet.id}")
-    # redirect_to "/favorites" 
-    # add to submit link 
   end
 end
