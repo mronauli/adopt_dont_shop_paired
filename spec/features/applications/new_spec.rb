@@ -21,15 +21,13 @@ RSpec.describe "as a visitor" do
       expect(page).to have_content(@sparky.name)
       expect(page).to have_content(@peppo.name)
       click_link "Adopt Favorited Pets"
-      expect(current_path).to eq("/application/new")
+      expect(current_path).to eq("/applications/new")
     end
     it "can fill out an application to apply for its favorited pets" do
 
       visit "/favorites"
       click_link "Adopt Favorited Pets"
       expect(current_path).to eq("/applications/new")
-
-      visit "/applications/new"
 
       name = "Stanley"
       address = "5432 Point Ave"
@@ -39,7 +37,7 @@ RSpec.describe "as a visitor" do
       phone_number = "303-455-9786"
       description = "I have a big backyard"
 
-      # select  :sparky, :peppo, from: :pets
+      # select :sparky, :peppo, from: :pets
       fill_in 'name', with: name
       fill_in 'address', with: address
       fill_in 'city', with: city
@@ -49,7 +47,8 @@ RSpec.describe "as a visitor" do
       fill_in 'description', with: description
 
       click_on "Submit Application"
-      expect(page).to have_content("Application for #{@sparky.name} and #{@peppo.name} submitted successfully!")
+      # allow_any_instance_of(Application).to receive(@sparky).with(@sparky.id, @sparky.name).and_return(@sparky)
+      expect(page).to have_content("Application for #{@sparky.name} submitted successfully!")
       expect(current_path).to eq("/favorites")
       expect(page).to_not have_content(@sparky.name)
       expect(page).to_not have_content(@peppo.name)
