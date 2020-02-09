@@ -1,18 +1,19 @@
  <%= image_tag(@pet.image) %>
-    <h1>Name: <%= link_to  @pet.name, "/pets/#{@pet.id}" %></h1>
-    <p>Approximate_Age: <%=  @pet.approximate_age %><p>
-    <p>Sex: <%=  @pet.sex  %><p>
-    <p>Description: <%=  @pet.description  %><p>
-    <p>Shelter: <%= link_to @pet.shelter.name, "/shelters/#{@pet.shelter.id}" %><p>
+  <h1>Name: <%= link_to  @pet.name, "/pets/#{@pet.id}" %></h1>
+  <p>Approximate_Age: <%=  @pet.approximate_age %><p>
+  <p>Sex: <%=  @pet.sex  %><p>
+  <p>Description: <%=  @pet.description  %><p>
+  <p>Shelter: <%= link_to @pet.shelter.name, "/shelters/#{@pet.shelter.id}" %><p>
     <% if @pet.adoptable == true  %>
         <p>Status: Adoptable<p>
     <% else%>
         <p>Status: Not Adoptable<p>
     <% end %>
-    <% if favorite.has_pet?(@pet.id) == true  %>
-       <%= button_to "Unfavorite This Pet" , "/favorites/#{@pet.id}", method: :delete %>
-   <% else %>
-       <%= button_to  "Favorite This Pet", "/favorites/#{@pet.id}", method: :patch %>
-   <% end %>
+    
+    <% if favorite.has_pet?(@pet.id) == true %>
+        <%= button_to "Unfavorite This Pet" , "/favorites/#{@pet.id}", method: :delete %>
+    <% else %>
+        <%= button_to  "Favorite This Pet", "/favorites/#{@pet.id}", method: :patch %>
+    <% end %>
 <%= link_to  "Update Pet", edit_pet_path %>
 <%= link_to  "Delete Pet", pet_path, method: :delete %>

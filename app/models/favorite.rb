@@ -18,14 +18,18 @@ class Favorite
   end
 
   def delete_pet(id)
-   @contents[id.to_s] = count_of(id) - 1
+    @contents[id.to_s] = count_of(id) - 1
   end
 
   def keys
-    @contents.keys.to_s
+    @contents.keys
   end
 
   def has_pet?(id)
-    @contents.keys.include?(id.to_s)
+    @contents.keys.include?(id.to_s) 
+  end
+
+  def destroy_all
+    @contents.clear
   end
 end
