@@ -41,6 +41,7 @@ RSpec.describe "as a visitor" do
 
       select @sparky.name, from: :pets
       select @peppo.name, from: :pets
+      #have to hold down command to select multiple. 
       fill_in 'name', with: name
       fill_in 'address', with: address
       fill_in 'city', with: city
@@ -52,7 +53,7 @@ RSpec.describe "as a visitor" do
       click_on "Submit Application"
       # (Application).allow_any_instance.to receive(@sparky)
       # (Application).allow_any_instance.to receive(@peppo)
-      expect(page).to have_content("Application for submitted successfully!")
+      expect(page).to have_content("Application has been submitted successfully!")
       expect(current_path).to eq("/favorites")
       expect(page).to_not have_content(@sparky.name)
       expect(page).to_not have_content(@peppo.name)
