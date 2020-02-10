@@ -9,7 +9,7 @@
     <% else%>
         <p>Status: Not Adoptable<p>
     <% end %>
-    
+
     <% if favorite.has_pet?(@pet.id) == true %>
         <%= button_to "Unfavorite This Pet" , "/favorites/#{@pet.id}", method: :delete %>
     <% else %>
@@ -17,3 +17,4 @@
     <% end %>
 <%= link_to  "Update Pet", edit_pet_path %>
 <%= link_to  "Delete Pet", pet_path, method: :delete %>
+<%= link_to  "View All Applications for this Pet", "/pet_applications/#{@pet.id}" %>
