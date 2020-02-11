@@ -1,4 +1,4 @@
-
+<div class="grid-container" id = "favorite">
 <% if favorite.contents.empty? == true %>
     <h1>No pets have been favorited yet.<h1>
 <%else%>
@@ -13,5 +13,16 @@
             <% end %>
         </div>
     <% end %>
-    <%= link_to  "Adopt Favorited Pets", "/applicatons/new" %>
+    <%= link_to  "Adopt Favorited Pets", "/applications/new" %>
  <% end %>
+</div>
+
+
+<div class="grid-container" id = "pet_apps">
+    <h1>All Pet Applications<h1>
+    <% if !favorite.contents.empty? && favorite.contents["applied"]%>
+        <% favorite.contents["applied"].map do |pet| %>
+            <h4>Name: <%= link_to  pet["name"], "/pets/#{pet["id"]}" %><h4> 
+            <% end %>
+    <%end %>
+</div>
