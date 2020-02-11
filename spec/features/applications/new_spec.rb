@@ -53,10 +53,12 @@ RSpec.describe "as a visitor" do
       click_on "Submit Application"
       # (Application).allow_any_instance.to receive(@sparky)
       # (Application).allow_any_instance.to receive(@peppo)
+      within("#favorite") do
+        expect(current_path).to eq("/favorites")
+        expect(page).to_not have_content(@sparky.name)
+        expect(page).to_not have_content(@peppo.name)
+      end
       expect(page).to have_content("Application has been submitted successfully!")
-      expect(current_path).to eq("/favorites")
-      expect(page).to_not have_content(@sparky.name)
-      expect(page).to_not have_content(@peppo.name)
     end
 
     it "will see a flash message if the application is not complete" do

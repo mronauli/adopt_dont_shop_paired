@@ -40,3 +40,4 @@ RSpec.describe "on an application's show page" do
     end
   end
 end
+
