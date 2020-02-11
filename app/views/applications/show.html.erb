@@ -5,6 +5,6 @@
 <p>Zip: <%= @application.zip%></p>
 <p>Phone Number: <%= @application.phone_number %></p>
 <p>Description: <%= @application.description %></p>
-Pets Applied For:<% @application.pet_names.each do |pet_name| %>
-  <p><%= pet_name %></p>
+Pets Applied For:<% @application.pets.each do |pet| %>
+  <%= link_to pet.name, "/pets/#{pet.id}" %>
 <% end %>
