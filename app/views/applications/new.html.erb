@@ -2,7 +2,6 @@
 
   <%= label_tag "pets" %>
   <%= select_tag :pets, options_from_collection_for_select(@pets, :id, :name), multiple: true %><br>
-  
 
   <%= label_tag "name" %>
   <%= text_field_tag :name %><br>

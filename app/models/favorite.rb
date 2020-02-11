@@ -6,12 +6,12 @@ class Favorite
   end
 
   def total_count
-    counter = 0 
-    @contents.each do |content| 
-      if content != "applied" 
-        counter += 1 
-      end 
-    end 
+    counter = 0
+    @contents.each do |content|
+      if content != "applied"
+        counter += 1
+      end
+    end
     counter
   end
 
@@ -32,15 +32,15 @@ class Favorite
   end
 
   def has_pet?(id)
-    @contents.keys.include?(id.to_s) 
+    @contents.keys.include?(id.to_s)
   end
 
   def destroy_all
     @contents.clear
   end
-  
+
   def applied(pet_id)
     @contents[:applied] = []
     @contents[:applied] << Pet.find(pet_id.to_i)
-  end 
+  end
 end
