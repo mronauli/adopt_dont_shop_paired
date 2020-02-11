@@ -9,6 +9,7 @@ RSpec.describe "on an application's show page" do
           @sparko = @shelter_1.pets.create(name: 'Sparko', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/west_highland_white_terrier_24.jpg', approximate_age: 5, sex: 'male', description: "Fun but no so nice",  adoptable: true)
           @application_1 = @sparky.applications.create(name: "Betty", address: "1234 Crocker St", city: "Rialto", state: "CO", zip: 80432, phone_number: "404-231-9056", description: "Loves dogs")
           @application_2 = Application.create(name: "Dom", address: "5460 Consuelo St", city: "Boston", state: "MA", zip: 56789, phone_number: "403-267-9810", description: "Lots of attention to give", pets:[@peppo, @sparko])
+          @application_3 = Application.create(name: "Jerry", address: "5678 Argon St", city: "Chillen", state: "PA", zip: 43569, phone_number: "303-376-0193", description: "Lots of snacks", pets:[@sparky])
       end
 
       it "can see an application and its information" do
@@ -31,13 +32,13 @@ RSpec.describe "on an application's show page" do
         expect(current_path).to eq("/pets/#{@sparky.id}")
       end
     end
-    it "it can see that the pet's status has changed to 'pending' on the pet's show page" do
-      visit "/applications/#{@application_1.id}"
-      click_link "Approve Application"
-      expect(current_path).to eq("/pets/#{@sparky.id}")
-      expect(page).to have_content("Pending")
-      expect(page).to have_content("On hold for #{@application_1.name}")
-    end
+    # it "it can see that the pet's status has changed to 'pending' on the pet's show page" do
+    #   visit "/applications/#{@application_1.id}"
+    #   click_link "Approve Application"
+    #   expect(current_path).to eq("/pets/#{@sparky.id}")
+    #   expect(page).to have_content("Pending")
+    #   expect(page).to have_content("On hold for #{@application_1.name}")
+    # end
     it "can get approved to adopt more than one pet" do
         visit "/applications/#{@application_2.id}"
         within ("#pet-#{@peppo.id}") do
@@ -50,10 +51,20 @@ RSpec.describe "on an application's show page" do
         expect(current_path).to eq("/pets/#{@sparko.id}")
       end
     end
+    xit "cannot approve an application if an application has already been approved for the pet" do
+      visit "/applications/#{@application_1.id}"
+      within ("#pet-#{@sparky.id}") do
+        click_link "Approve Application"
+      end
+      visit "/applications/#{@application_3.id}"
+      within ("#pet-#{@sparky.id}") do
+        click_link "Approve Application"
+      end
+      expect(page).to have_content("No more applications for this pet can be approved at this time.")
+    end
   end
 
-  it "cannot approve an application if an application has already been approved for the pet" do
-  end
+
 end
 
 # User Story 24, Pets can only have one approved application on them at any time
