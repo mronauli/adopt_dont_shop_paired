@@ -5,9 +5,9 @@
   <p>Description: <%=  @pet.description  %><p>
   <p>Shelter: <%= link_to @pet.shelter.name, "/shelters/#{@pet.shelter.id}" %><p>
     <% if @pet.adoptable == true  %>
-        <p>Status: Adoptable<p>
-    <% else%>
-        <p>Status: Not Adoptable<p>
+        <%= "Status: Adoptable" %>
+    <% else %>
+        <%= "Status: Pending" %>
     <% end %>
 
     <% if favorite.has_pet?(@pet.id) == true %>
