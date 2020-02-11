@@ -3,6 +3,6 @@ class PetApplication < ApplicationRecord
   belongs_to :application
 
   def people_names
-    PetApplication.joins(:application).map(&:application).map(&:name).uniq
+    application.name
   end
 end

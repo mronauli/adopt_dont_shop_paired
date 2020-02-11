@@ -9,13 +9,13 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    @applied_for = Pet.find(params[:pets])
-    @applied_for.each do |pet|
+    applied_for = Pet.find(params[:pets])
+    applied_for.each do |pet|
       pet.applications.new(application_params)
     end
-    case @applied_for.map do |pet_app|
+    case applied_for.all? do |pet_app|
       pet_app.save
-      end
+    end
       when true
         session[:favorite].clear
         flash[:success] = "Application has been submitted successfully!"
