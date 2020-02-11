@@ -91,7 +91,7 @@ describe "As a visitor" do
             click_link "Adopt Favorited Pets"
             expect(current_path).to eq("/applications/new")
 
-            name = ""
+            name = "Daniel"
             address = "5432 Point Ave"
             city = "Denver"
             state = "CO"
@@ -111,9 +111,11 @@ describe "As a visitor" do
             click_on "Submit Application"
         
             visit "/favorites"
-            # within("#pet_application-#{@application_1.id}") do
-            # expect(page).to have_content(@sparky.name)
-            # end
+
+            within("#pet_apps") do
+                expect(page).to have_content(@sparky.name)
+                expect(page).to_not have_content(@peppo.name)
+            end
         end
     end
 end
