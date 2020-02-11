@@ -8,7 +8,7 @@
         <div class="grid-container" id= 'pet-<%=pet.id%>'>
             <% if favorite.has_pet?(pet.id) %>
                 <%= image_tag(pet.image) %>
-                <h4>Name: <%= link_to  pet.name, "/pets/#{pet.id}" %><h4> 
+                <h4>Name: <%= link_to  pet.name, "/pets/#{pet.id}" %><h4>
                  <%= button_to "Unfavorite This Pet" , "/favorites/#{pet.id}", method: :delete %>
             <% end %>
         </div>
@@ -16,7 +16,6 @@
     <%= link_to  "Adopt Favorited Pets", "/applications/new" %>
  <% end %>
 </div>
-
 
 <div class="grid-container" id = "pet_apps">
     <h1>All Pet Applications<h1>
@@ -26,3 +25,4 @@
             <% end %>
     <%end %>
 </div>
+

@@ -1,4 +1,8 @@
 class ApplicationsController < ApplicationController
+  def show
+    @application = Application.find(params[:id])
+  end
+
   def new
     favorited_pets = favorite.contents.keys
     @pets = Pet.find(favorited_pets)
@@ -17,10 +21,10 @@ class ApplicationsController < ApplicationController
           end
         flash[:success] = "Application has been submitted successfully!" 
         redirect_to "/favorites"
-      else 
+      else
         flash[:alert] = "Please enter information for all fields."
         redirect_to "/applications/new"
-    end 
+    end
   end
 
   private
