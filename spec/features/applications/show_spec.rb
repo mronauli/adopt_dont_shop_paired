@@ -38,5 +38,26 @@ RSpec.describe "on an application's show page" do
       expect(page).to have_content("Pending")
       expect(page).to have_content("On hold for #{@application_1.name}")
     end
+    it "can get approved to adopt more than one pet" do
+        visit "/applications/#{@application_2.id}"
+        within ("#pet-#{@peppo.id}") do
+          click_link "Approve Application"
+          expect(current_path).to eq("/pets/#{@peppo.id}")
+      end
+      visit "/applications/#{@application_2.id}"
+      within ("#pet-#{@sparko.id}") do
+        click_link "Approve Application"
+        expect(current_path).to eq("/pets/#{@sparko.id}")
+      end
+    end
   end
 end
+
+# [ ] done
+#
+# User Story 23, Users can get approved to adopt more than one pet
+#
+# As a visitor
+# When an application is made for more than one pet
+# When I visit that applications show page
+# I'm able to approve the application for any number of pets

@@ -16,12 +16,3 @@ RSpec.describe PetApplication, type: :model do
       end
     end
   end
-
-
-#   [ ] done
-#
-# User Story 21, Pet Applications Index Page When No Applications
-#
-# As a visitor
-# When I visit a pet applications index page for a pet that has no applications on them
-# I see a message saying that there are no applications for this pet yet
