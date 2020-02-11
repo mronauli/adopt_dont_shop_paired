@@ -8,6 +8,7 @@ RSpec.describe "on an application's show page" do
           @peppo  = @shelter_1.pets.create(name: 'Peppo', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/mexican_hairless_105.jpg', approximate_age: 13, sex: 'female', description: "Basically a naked molerat",  adoptable: true)
           @sparko = @shelter_1.pets.create(name: 'Sparko', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/west_highland_white_terrier_24.jpg', approximate_age: 5, sex: 'male', description: "Fun but no so nice",  adoptable: true)
           @application_1 = @sparky.applications.create(name: "Betty", address: "1234 Crocker St", city: "Rialto", state: "CO", zip: 80432, phone_number: "404-231-9056", description: "Loves dogs")
+          @application_2 = Application.create(name: "Dom", address: "5460 Consuelo St", city: "Boston", state: "MA", zip: 56789, phone_number: "403-267-9810", description: "Lots of attention to give", pets:[@peppo, @sparko])
       end
 
       it "can see an application and its information" do
@@ -22,6 +23,20 @@ RSpec.describe "on an application's show page" do
         expect(page).to have_content(@application_1.description)
         expect(page).to have_content(@sparky.name)
         expect(page).to_not have_content(@peppo.name)
+    end
+    it "can click a link to to approve an application for a specific pet" do
+      visit "/applications/#{@application_1.id}"
+      within ("#pet-#{@sparky.id}") do
+        click_link "Approve Application"
+        expect(current_path).to eq("/pets/#{@sparky.id}")
+      end
+    end
+    it "it can see that the pet's status has changed to 'pending' on the pet's show page" do
+      visit "/applications/#{@application_1.id}"
+      click_link "Approve Application"
+      expect(current_path).to eq("/pets/#{@sparky.id}")
+      expect(page).to have_content("Pending")
+      expect(page).to have_content("On hold for #{@application_1.name}")
     end
   end
 end
