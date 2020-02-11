@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   post '/applications', to: 'applications#create'
 
   get '/pet_applications/:id', to: 'pet_applications#index'
-  patch '/pending/:id', to: 'pets#pending'
+  patch '/applications/:application_id/pet_applications/:pet_id/pending', to: 'pet_applications#pending'
 end
