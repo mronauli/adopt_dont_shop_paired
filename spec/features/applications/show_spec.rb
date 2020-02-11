@@ -51,13 +51,17 @@ RSpec.describe "on an application's show page" do
       end
     end
   end
+
+  it "cannot approve an application if an application has already been approved for the pet" do
+  end
 end
 
+# User Story 24, Pets can only have one approved application on them at any time
+#
 # [ ] done
 #
-# User Story 23, Users can get approved to adopt more than one pet
-#
 # As a visitor
-# When an application is made for more than one pet
-# When I visit that applications show page
-# I'm able to approve the application for any number of pets
+# When a pet has more than one application made for them
+# And one application has already been approved for them
+# I can not approve any other applications for that pet but all other applications still remain on file (they can be seen on the pets application index page)
+# (This can be done by either taking away the option to approve the application, or having a flash message pop up saying that no more applications can be approved for this pet at this time)
