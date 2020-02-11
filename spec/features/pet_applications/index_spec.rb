@@ -29,5 +29,6 @@ describe "on the pet applications index page" do
     click_link "View All Applications for this Pet"
     visit "/pet_applications/#{@sparko.id}"
     expect(page).to have_content("There are no applications for this pet yet.")
+
   end
 end
