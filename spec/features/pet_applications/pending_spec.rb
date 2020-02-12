@@ -10,9 +10,8 @@ RSpec.describe "on an application's show page" do
           @application_1 = @sparky.applications.create(name: "Betty", address: "1234 Crocker St", city: "Rialto", state: "CO", zip: 80432, phone_number: "404-231-9056", description: "Loves dogs")
           @application_2 = Application.create(name: "Dom", address: "5460 Consuelo St", city: "Boston", state: "MA", zip: 56789, phone_number: "403-267-9810", description: "Lots of attention to give", pets:[@peppo, @sparko])
           @application_3 = Application.create(name: "Jerry", address: "5678 Argon St", city: "Chillen", state: "PA", zip: 43569, phone_number: "303-376-0193", description: "Lots of snacks", pets:[@sparky])
-          # @pet_application_1 = PetApplication.create(application_id: @application_1.id, pet_id: @sparky.id)
       end
-      it "it can see that the pet's status has changed to 'pending' on the pet's show page" do
+      it "can see that the pet's status has changed to 'pending' on the pet's show page" do
         visit "/applications/#{@application_1.id}"
         within ("#pet-#{@sparky.id}") do
           click_link "Approve Application"
@@ -20,6 +19,24 @@ RSpec.describe "on an application's show page" do
         expect(current_path).to eq("/pets/#{@sparky.id}")
         expect(page).to have_content("Pending")
         expect(page).to have_content("On hold for #{@application_1.name}")
+      end
+
+      it "can approve more than one pet" do
+        visit "/applications/#{@application_2.id}"
+        within ("#pet-#{@peppo.id}") do
+          click_link "Approve Application"
+        end
+        expect(current_path).to eq("/pets/#{@peppo.id}")
+        expect(page).to have_content("Pending")
+        expect(page).to have_content("On hold for #{@application_2.name}")
+
+        visit "/applications/#{@application_2.id}"
+        within ("#pet-#{@sparko.id}") do
+          click_link "Approve Application"
+        end
+        expect(current_path).to eq("/pets/#{@sparko.id}")
+        expect(page).to have_content("Pending")
+        expect(page).to have_content("On hold for #{@application_2.name}")
       end
     end
   end

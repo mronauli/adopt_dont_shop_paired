@@ -98,7 +98,6 @@ describe "As a visitor" do
             zip = "80231"
             phone_number = "303-455-9786"
             description = "I have a big backyard"
-            save_and_open_page
 
             select @sparky.name, from: :pets
             select @peppo.name, from: :pets
