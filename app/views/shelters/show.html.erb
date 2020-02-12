@@ -16,6 +16,17 @@ Zip Code:<%= @shelter.zip %></br>
   </div>
 <% end %>
 
+  <h1>Shelter Statistics<h1>
+  <section id="pet_count-<%= @shelter.id %>">
+     Number of Pets: <%= @shelter.pet_count %>
+   </section>
+   <section id="rating-<%= @shelter.id %>">
+     Rating: <%= @shelter.average_rating.round(2) %>
+   </section>
+   <section id="num_apps-<%= @shelter.id %>">
+     Number of Applications: <%= @shelter.count_applications %>
+   </section>
+
 <%= link_to  "All Pets", "/shelters/#{@shelter.id}/pets" %><br>
 <%= link_to  "Add Review", "/shelters/#{@shelter.id}/reviews/new" %><br>
 <%= link_to  "Update Shelter", edit_shelter_path %>

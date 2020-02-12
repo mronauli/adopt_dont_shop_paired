@@ -1,5 +1,7 @@
 <%= form_tag("/applications", method: :post) do %>
 
+
+
   <%= label_tag "pets" %>
   <%= select_tag :pets, options_from_collection_for_select(@pets, :id, :name), multiple: true %><br>
 

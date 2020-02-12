@@ -19,9 +19,9 @@
 
 <div class="grid-container" id = "pet_apps">
     <h1>All Pet Applications<h1>
-    <% if !favorite.contents.empty? && favorite.contents["applied"]%>
-        <% favorite.contents["applied"].each do |pet| %>
-            Name: <%= link_to pet["name"], "/pets/#{pet['id']}" %>
-            <% end %>
-    <%end %>
+      <% @applications.each do |app| %>
+        <% app.pets.each do |pet| %>
+        Name: <%= link_to pet.name, "/pets/#{pet.id}" %>
+        <% end %>
+      <% end %>
 </div>

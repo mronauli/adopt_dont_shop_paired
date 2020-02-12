@@ -38,7 +38,14 @@ class PetsController < ApplicationController
      end
 
      def destroy
-        @pet = Pet.destroy(params[:id])
+
+        pet = Pet.find(params[:id])
+        # binding.pry
+        favorite.delete_pet(pet.id.to_s)
+
+        # session[:favorite].delete(pet.id.to_s)
+        pet.destroy
+
 
         redirect_to pets_path
       end

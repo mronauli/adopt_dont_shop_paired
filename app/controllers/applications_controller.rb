@@ -8,24 +8,25 @@ class ApplicationsController < ApplicationController
     @pets = Pet.find(favorited_pets)
   end
 
-
   def create
-    pet_applications = Pet.find(params[:pets])
-    pet_ids = params[:pets]
-    pet_applications.each do |pet|
-    pet.applications.new(application_params)
+    @applications = []
+    application = Application.new(application_params)
+    pets = params[:pets]
+    pets.each do |id|
+      pet = Pet.find(id)
+      application.pets << pet
     end
-    if pet_applications.all? { |pet_app| pet_app.save }
-          pet_ids.each do |pet_id|
-            favorite.applied(pet_id)
-            session[:favorite].delete(pet_id)
-          end
+    if application.save
+       @applications << application
+       pets.each do |id|
+         session[:favorite].delete(id)
+      end
         flash[:success] = "Application has been submitted successfully!"
         redirect_to "/favorites"
-      else
+     else
         flash[:alert] = "Please enter information for all fields."
         redirect_to "/applications/new"
-    end
+      end
   end
 
   private
