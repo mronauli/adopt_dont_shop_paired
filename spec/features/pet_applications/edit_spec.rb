@@ -38,5 +38,23 @@ RSpec.describe "on an application's show page" do
         expect(page).to have_content("Pending")
         expect(page).to have_content("On hold for #{@application_2.name}")
       end
+
+      it "can see a link to unapprove an application for a pet" do
+        visit "/applications/#{@application_2.id}"
+        within ("#pet-#{@peppo.id}") do
+          click_link "Approve Application"
+        end
+        visit "/applications/#{@application_2.id}"
+        within ("#pet-#{@peppo.id}") do
+          click_link "Unapprove Application"
+        end
+        expect(current_path).to eq("/applications/#{@application_2.id}")
+        within ("#pet-#{@peppo.id}") do
+          expect(page).to have_link("Approve Application")
+        end
+        visit "/pets/#{@peppo.id}"
+        expect(page).to have_content("Adoptable")
+        expect(page).to_not have_content("On hold for #{@application_2.name}")
+      end
     end
   end
