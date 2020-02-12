@@ -21,9 +21,7 @@
     <h1>All Pet Applications<h1>
     <% if !favorite.contents.empty? && favorite.contents["applied"]%>
         <% favorite.contents["applied"].each do |pet| %>
-        <%= require "pry"; binding.pry %>
             Name: <%= link_to pet["name"], "/pets/#{pet['id']}" %>
-            <%=  %>
             <% end %>
     <%end %>
 </div>
