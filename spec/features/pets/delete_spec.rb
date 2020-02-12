@@ -62,6 +62,7 @@ RSpec.describe 'As a visitor' do
             expect(page).to have_content("Favorites: 2")
           end
 
+
           click_link "Delete Pet"
 
           visit pets_path
@@ -70,7 +71,7 @@ RSpec.describe 'As a visitor' do
             expect(page).to have_content("Favorites: 1")
           end
 
-          within("#pet-#{@pet_2.id}") do
+          within("#pet-#{@pet_1.id}") do
             click_link "Delete Pet"
           end
 
