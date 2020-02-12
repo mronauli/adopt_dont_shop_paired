@@ -14,12 +14,22 @@ RSpec.describe 'As a visitor' do
                                     city: "Hershey",
                                     state: "PA",
                                     zip: 17033)
-
+        @sparky = @shelter_1.pets.create!(name: 'Sparky', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/west_highland_white_terrier_24.jpg', approximate_age: 5, sex: 'male', description: "Fun but no so nice",  adoptable: true)
+        @peppo  = @shelter_1.pets.create!(name: 'Peppo', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/mexican_hairless_105.jpg', approximate_age: 13, sex: 'female', description: "Basically a naked molerat",  adoptable: true)
+        @sparko = @shelter_1.pets.create!(name: 'Sparko', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/west_highland_white_terrier_24.jpg', approximate_age: 5, sex: 'male', description: "Fun but no so nice",  adoptable: true)
+        @spark = @shelter_2.pets.create!(name: 'Sparko', image: 'https://adopt-dont-shop.s3-us-west-1.amazonaws.com/images/west_highland_white_terrier_24.jpg', approximate_age: 5, sex: 'male', description: "Fun but no so nice",  adoptable: true)
+        @application_1 = @sparky.applications.create(name: "Betty", address: "1234 Crocker St", city: "Rialto", state: "CO", zip: 80432, phone_number: "404-231-9056", description: "Loves dogs")
+        @application_2 = @sparky.applications.create(name: "Butter", address: "1234 Cup St", city: "Sillicon Valley", state: "CO", zip: 80532, phone_number: "403-231-9056", description: "Loves doge")
+        @application_3 = @peppo.applications.create(name: "Boop", address: "1234 Cup St", city: "Sillicon Valley", state: "CO", zip: 80532, phone_number: "403-231-9056", description: "Loves doge")
+        @application_4 = @spark.applications.create(name: "Bonny", address: "1234 Cup St", city: "Sillicon Valley", state: "CO", zip: 80532, phone_number: "403-231-9056", description: "Loves doge")
         @review_1 = @shelter_1.reviews.create!(title: "Very bad!",
                                   rating: 1,
                                   content: "Molly came back skinny")
+        @review_2 = @shelter_1.reviews.create!(title: "Very okay!",
+                                               rating: 3,
+                                               content: "Daily massage")
 
-        @review_2 = @shelter_2.reviews.create!(title: "Splendid!",
+        @review_3 = @shelter_2.reviews.create!(title: "Splendid!",
                                   rating: 4,
                                   content: "It's like a hotel but for pets",
                                   picture: "https://www.google.com/search?q=dumb+friends+league&tbm=isch&ved=2ahUKEwjwiKP13bbnAhX4AJ0JHfaFBi0Q2-cCegQIABAA&oq=dumb+friends+league&gs_l=img.3..0l6j0i5i30l3j0i24.14422.18052..18299...1.0..0.58.969.20......0....1..gws-wiz-img.......35i39j0i67j0i131j0i30j0i8i30.MQn0aSRcWtk&ei=Rcc4XrDSMPiB9PwP9oua6AI&bih=723&biw=1499&rlz=1C5CHFA_enUS872US872#imgrc=BfA_oIgFjbI-5M")
@@ -49,10 +59,22 @@ RSpec.describe 'As a visitor' do
           end
 
             expect(page).to_not have_content(@shelter_2.name)
-            expect(page).to_not have_content(@review_2.title)
-            expect(page).to_not have_content(@review_2.rating)
-            expect(page).to_not have_content(@review_2.content)
-            expect(page).to_not have_css("img[src *= '#{@review_2.picture}']")
+            expect(page).to_not have_content(@review_3.title)
+            expect(page).to_not have_content(@review_3.rating)
+            expect(page).to_not have_content(@review_3.content)
+            expect(page).to_not have_css("img[src *= '#{@review_3.picture}']")
+        end
+        it "can see count of pets, review and number of applications at a shelter" do
+          visit shelter_path (@shelter_1)
+          within("#pet_count-#{@shelter_1.id}") do
+            expect(page).to have_content("3")
+          end
+          within("#rating-#{@shelter_1.id}") do
+            expect(page).to have_content("2")
+          end
+          within("#num_apps-#{@shelter_1.id}") do
+            expect(page).to have_content("3")
+          end
         end
     end
 end

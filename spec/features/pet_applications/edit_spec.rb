@@ -11,49 +11,50 @@ RSpec.describe "on an application's show page" do
           @application_2 = Application.create(name: "Dom", address: "5460 Consuelo St", city: "Boston", state: "MA", zip: 56789, phone_number: "403-267-9810", description: "Lots of attention to give", pets:[@peppo, @sparko])
           @application_3 = Application.create(name: "Jerry", address: "5678 Argon St", city: "Chillen", state: "PA", zip: 43569, phone_number: "303-376-0193", description: "Lots of snacks", pets:[@sparky])
       end
-
-      it "can see an application and its information" do
-
+      it "can see that the pet's status has changed to 'pending' on the pet's show page" do
         visit "/applications/#{@application_1.id}"
-        expect(page).to have_content(@application_1.name)
-        expect(page).to have_content(@application_1.address)
-        expect(page).to have_content(@application_1.city)
-        expect(page).to have_content(@application_1.state)
-        expect(page).to have_content(@application_1.zip)
-        expect(page).to have_content(@application_1.phone_number)
-        expect(page).to have_content(@application_1.description)
-        expect(page).to have_content(@sparky.name)
-        expect(page).to_not have_content(@peppo.name)
-    end
-    it "can click a link to to approve an application for a specific pet" do
-      visit "/applications/#{@application_1.id}"
-      within ("#pet-#{@sparky.id}") do
-        click_link "Approve Application"
+        within ("#pet-#{@sparky.id}") do
+          click_link "Approve Application"
+        end
         expect(current_path).to eq("/pets/#{@sparky.id}")
+        expect(page).to have_content("Pending")
+        expect(page).to have_content("On hold for #{@application_1.name}")
       end
-    end
-    it "can get approved to adopt more than one pet" do
+
+      it "can approve more than one pet" do
         visit "/applications/#{@application_2.id}"
         within ("#pet-#{@peppo.id}") do
           click_link "Approve Application"
-          expect(current_path).to eq("/pets/#{@peppo.id}")
-      end
-      visit "/applications/#{@application_2.id}"
-      within ("#pet-#{@sparko.id}") do
-        click_link "Approve Application"
+        end
+        expect(current_path).to eq("/pets/#{@peppo.id}")
+        expect(page).to have_content("Pending")
+        expect(page).to have_content("On hold for #{@application_2.name}")
+
+        visit "/applications/#{@application_2.id}"
+        within ("#pet-#{@sparko.id}") do
+          click_link "Approve Application"
+        end
         expect(current_path).to eq("/pets/#{@sparko.id}")
+        expect(page).to have_content("Pending")
+        expect(page).to have_content("On hold for #{@application_2.name}")
       end
-    end
-    it "cannot approve an application if an application has already been approved for the pet" do
-      visit "/applications/#{@application_1.id}"
-      within ("#pet-#{@sparky.id}") do
-        click_link "Approve Application"
-      end
-      visit "/applications/#{@application_3.id}"
-      within ("#pet-#{@sparky.id}") do
-        expect(page).to_not have_link "Approve Application"
-        # expect(page).to have_content("No more applications for this pet can be approved at this time.")
+
+      it "can see a link to unapprove an application for a pet" do
+        visit "/applications/#{@application_2.id}"
+        within ("#pet-#{@peppo.id}") do
+          click_link "Approve Application"
+        end
+        visit "/applications/#{@application_2.id}"
+        within ("#pet-#{@peppo.id}") do
+          click_link "Unapprove Application"
+        end
+        expect(current_path).to eq("/applications/#{@application_2.id}")
+        within ("#pet-#{@peppo.id}") do
+          expect(page).to have_link("Approve Application")
+        end
+        visit "/pets/#{@peppo.id}"
+        expect(page).to have_content("Adoptable")
+        expect(page).to_not have_content("On hold for #{@application_2.name}")
       end
     end
   end
-end

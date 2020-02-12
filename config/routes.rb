@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get '/', to:  'startup#index'
 
   resources :shelters do
-    resources :pets, only: [:new, :index, :create]
+    resources :pets, only: [:index, :new, :create, :update]
   end
 
   resources :pets, except: [:new, :create]
@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   post '/applications', to: 'applications#create'
 
   get '/pet_applications/:id', to: 'pet_applications#index'
-  patch '/pending/:id', to: 'pets#pending'
+  patch '/applications/:application_id/pet_applications/:pet_id/approved', to: 'pet_applications#approved'
+  patch '/applications/:application_id/pet_applications/:pet_id/revoked', to: 'pet_applications#revoked'
 end
