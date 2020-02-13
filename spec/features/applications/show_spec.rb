@@ -57,16 +57,14 @@ RSpec.describe "on an application's show page" do
     it "can click the name of applicants" do
       visit "/applications/#{@application_1.id}"
       expect(page).to have_link "#{@application_1.name}"
-      visit "/pet_applications"
-      within ("#pet_application-#{@application_1.id}") do
-        expect(page).to have_link "#{@application_1.name}"
-      end
-      within ("#pet_application-#{@application_2.id}") do
-        expect(page).to have_link "#{@application_2.name}"
-      end
-      within ("#pet_application-#{@application_3.id}") do
-        expect(page).to have_link "#{@application_3.name}"
-      end
+      visit "/applications/#{@application_1.id}"
+
+      visit "/pets/#{@sparky.id}"
+      click_link "View All Applications for this Pet"
+
+      visit "/pet_applications/#{@sparky.id}"
+      expect(page).to have_link "#{@application_1.name}"
+      expect(page).to have_link "#{@application_3.name}"
     end
   end
 end

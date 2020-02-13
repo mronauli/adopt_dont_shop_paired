@@ -71,7 +71,7 @@ RSpec.describe 'As a visitor' do
             expect(page).to have_content("Favorites: 1")
           end
 
-          within("#pet-#{@pet_2.id}") do
+          within("#pet-#{@pet_1.id}") do
             click_link "Delete Pet"
           end
 
@@ -81,12 +81,3 @@ RSpec.describe 'As a visitor' do
         end
     end
 end
-
-
-
-# User Story 32, Deleting a pet removes it from favorites
-#
-# As a visitor
-# If I've added a pet to my favorites
-# When I try to delete that pet from the database
-# They are also removed from the favorites list
