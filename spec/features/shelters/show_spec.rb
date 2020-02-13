@@ -76,5 +76,39 @@ RSpec.describe 'As a visitor' do
             expect(page).to have_content("3")
           end
         end
+        it "can click link for all shelter names" do
+          visit "/shelters/#{@shelter_1.id}"
+          expect(page).to have_link "#{@shelter_1.name}"
+
+          visit "/pets/"
+          within("#pet-#{@sparky.id}") do
+            expect(page).to have_link "#{@shelter_1.name}"
+          end
+          within("#pet-#{@spark.id}") do
+            expect(page).to have_link "#{@shelter_2.name}"
+          end
+          visit "/pets/#{@sparky.id}"
+          expect(page).to have_link "#{@shelter_1.name}"
+
+          visit "/pets/#{@peppo.id}"
+          expect(page).to have_link "#{@shelter_1.name}"
+
+          visit "/pets/#{@sparko.id}"
+          expect(page).to have_link "#{@shelter_1.name}"
+
+          visit "/pets/#{@spark.id}"
+          expect(page).to have_link "#{@shelter_2.name}"
+
+          visit "/favorites"
+          expect(page).to have_link "#{@peppo.name}"
+
+          visit "/shelters"
+          within("#shelter-#{@shelter_1.id}") do
+            expect(page).to have_link "#{@shelter_1.name}"
+          end
+          within("#shelter-#{@shelter_2.id}") do
+            expect(page).to have_link "#{@shelter_2.name}"
+          end
+        end
     end
 end

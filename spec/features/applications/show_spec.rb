@@ -52,7 +52,20 @@ RSpec.describe "on an application's show page" do
       visit "/applications/#{@application_3.id}"
       within ("#pet-#{@sparky.id}") do
         expect(page).to_not have_link "Approve Application"
-        # expect(page).to have_content("No more applications for this pet can be approved at this time.")
+      end
+    end
+    it "can click the name of applicants" do
+      visit "/applications/#{@application_1.id}"
+      expect(page).to have_link "#{@application_1.name}"
+      visit "/pet_applications"
+      within ("#pet_application-#{@application_1.id}") do
+        expect(page).to have_link "#{@application_1.name}"
+      end
+      within ("#pet_application-#{@application_2.id}") do
+        expect(page).to have_link "#{@application_2.name}"
+      end
+      within ("#pet_application-#{@application_3.id}") do
+        expect(page).to have_link "#{@application_3.name}"
       end
     end
   end
