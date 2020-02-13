@@ -8,7 +8,7 @@
 Pets Applied For:<% @application.pets.each do |pet| %>
   <section id="pet-<%= pet.id %>">
     <%= link_to pet.name, "/pets/#{pet.id}" %>
-    <% if pet.adoptable == true %>
+    <% if pet.adoptable? %>
         Pet: <%= link_to "Approve Application", "/applications/#{@application.id}/pet_applications/#{pet.id}/approved", method: :patch %>
     <% else %>
         Pet: <%= link_to "Unapprove Application", "/applications/#{@application.id}/pet_applications/#{pet.id}/revoked", method: :patch  %>

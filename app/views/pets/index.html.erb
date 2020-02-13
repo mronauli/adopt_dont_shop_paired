@@ -12,7 +12,7 @@
     <h6>Sex: <%=  pet.sex  %><h6>
     <h6>Shelter: <%= link_to pet.shelter.name, "/shelters/#{pet.shelter.id}" %><h6>
     <%= link_to  "Update Pet", "/pets/#{pet.id}/edit" %>
-    <% if pet.adoptable == true %>
+    <% if pet.adoptable? %>
       <%= link_to  "Delete Pet", "/pets/#{pet.id}", method: :delete %>
     <% end %>
    </div>

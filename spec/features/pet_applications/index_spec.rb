@@ -9,9 +9,6 @@ describe "on the pet applications index page" do
     @application_1 = @sparky.applications.create(name: "Betty", address: "1234 Crocker St", city: "Rialto", state: "CO", zip: 80432, phone_number: "404-231-9056", description: "Loves dogs")
     @application_2 = @sparky.applications.create(name: "Butter", address: "1234 Cup St", city: "Sillicon Valley", state: "CO", zip: 80532, phone_number: "403-231-9056", description: "Loves doge")
     @application_3 = @peppo.applications.create(name: "Boop", address: "1234 Cup St", city: "Sillicon Valley", state: "CO", zip: 80532, phone_number: "403-231-9056", description: "Loves doge")
-    @pet_application_1 = PetApplication.create(pet_id: @sparky.id, application_id: @application_1.id)
-    @pet_application_2 = PetApplication.create(pet_id: @sparky.id, application_id: @application_2.id)
-    @pet_application_3 = PetApplication.create(pet_id: @peppo.id, application_id: @application_3.id)
   end
   describe "after one or more applications have been create" do
     it "sees a section that lists all the pets that have at least one application" do
@@ -24,11 +21,26 @@ describe "on the pet applications index page" do
     end
   end
 
-  it "sees a 'there are no applications for this pet when a pet has no applications on it'" do
+  it "sees there are no applications for this pet when a pet has no applications on it'" do
     visit "/pets/#{@sparko.id}"
     click_link "View All Applications for this Pet"
     visit "/pet_applications/#{@sparko.id}"
     expect(page).to have_content("There are no applications for this pet yet.")
+  end
 
+describe "when an application has already been approved for a pet" do
+  it "sees an unapprove application link." do
+    visit "/applications/#{@application_1.id}"
+    within ("#pet-#{@sparky.id}") do
+      click_link "Approve Application"
+    end
+
+    visit "/applications/#{@application_2.id}"
+    within ("#pet-#{@sparky.id}") do
+      expect(page).to have_link("Unapprove Application")
+    end
+    visit "/pets/#{@sparky.id}"
+    expect(page).to have_content("Pending")
+    end
   end
 end
