@@ -1,5 +1,7 @@
 
 <h1>All Applications<h1>
 <% @pet_applications.each do |pet_application| %>
-<%= link_to pet_application.name, "/pet_applications/#{pet_application.id}" %>
+  <div class="grid-container" id= 'pet_application-<%=pet_application.id%>'>
+    <%= link_to pet_application.name, "/pet_applications/#{pet_application.id}" %>
+  </div>
 <%end%>

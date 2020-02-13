@@ -61,6 +61,7 @@ RSpec.describe 'As a visitor' do
           within ".navbar-nav" do
             expect(page).to have_content("Favorites: 2")
           end
+          visit "/pets/#{@pet_1.id}"
 
           click_link "Delete Pet"
 
