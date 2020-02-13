@@ -1,0 +1,27 @@
+<div class="grid-container" id = "favorite">
+<% if favorite.contents.empty? == true %>
+    <h1>No pets have been favorited yet.<h1>
+<%else%>
+    <h1>All Favorited Pets<h1>
+    <h4><%= button_to "Unfavorite All Pets" , "/favorites", method: :delete %></h4><br>
+    <% @pets.each do |pet|  %>
+        <div class="grid-container" id= 'pet-<%=pet.id%>'>
+            <% if favorite.has_pet?(pet.id) %>
+                <%= image_tag(pet.image) %>
+                <h4>Name: <%= link_to  pet.name, "/pets/#{pet.id}" %><h4>
+                 <%= button_to "Unfavorite This Pet" , "/favorites/#{pet.id}", method: :delete %>
+            <% end %>
+        </div>
+    <% end %>
+    <%= link_to  "Adopt Favorited Pets", "/applications/new" %>
+ <% end %>
+</div>
+
+<div class="grid-container" id = "pet_apps">
+    <h1>All Pet Applications<h1>
+      <% @applications.each do |app| %>
+        <% app.pets.each do |pet| %>
+        Name: <%= link_to pet.name, "/pets/#{pet.id}" %>
+        <% end %>
+      <% end %>
+</div>
