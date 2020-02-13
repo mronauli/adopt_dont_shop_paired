@@ -63,6 +63,7 @@ RSpec.describe 'As a visitor' do
           end
           visit "/pets/#{@pet_1.id}"
 
+
           click_link "Delete Pet"
 
           visit pets_path
