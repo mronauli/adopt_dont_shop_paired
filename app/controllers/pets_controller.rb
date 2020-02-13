@@ -28,9 +28,9 @@ class PetsController < ApplicationController
 
     def edit
         @pet = Pet.find(params[:id])
-     end
+    end
 
-     def update
+    def update
         @pet = Pet.find(params[:id])
         if @pet.update_attributes(pet_params)
           redirect_to pet_path
@@ -40,18 +40,12 @@ class PetsController < ApplicationController
         end
      end
 
-     def destroy
-
+    def destroy
         pet = Pet.find(params[:id])
-        binding.pry
-        favorite.delete_pet(pet.id.to_s)
-
-        # session[:favorite].delete(pet.id.to_s)
+        favorite.contents.delete(pet.id.to_s)
         pet.destroy
-
-
         redirect_to pets_path
-      end
+    end
 
     private
         def pet_params
