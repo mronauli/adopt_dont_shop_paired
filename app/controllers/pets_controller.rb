@@ -43,10 +43,8 @@ class PetsController < ApplicationController
      def destroy
 
         pet = Pet.find(params[:id])
-        binding.pry
         favorite.delete_pet(pet.id.to_s)
 
-        # session[:favorite].delete(pet.id.to_s)
         pet.destroy
 
 
